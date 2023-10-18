@@ -1,23 +1,14 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import TodoForm from './TodoForm';
-import TodoItem from './TodoItem';
-
+import TodoForm from './Todo/TodoForm';
+import TodoItem from './Todo/TodoItem';
+ 
 function App() {
   const [todo, setTodo] = useState([]);
   const [newTodo, setNewTodo] = useState('');
 
   const onChangeNewTodo = (e) => {
     setNewTodo(e.target.value);
-  }
-
-  const onChangeCheckBox = (e) => {
-    setTodo((prevTodo) => {
-      const nextTodo = [...prevTodo];
-      nextTodo[index] = {...nextTodo[index]};
-      nextTodo[index].completed = e.target.check;
-      return nextTodo;
-    })
   }
 
   useEffect(() => {
@@ -40,7 +31,7 @@ function App() {
           </div>
         ) : (
           <>
-            {todo.map((v, i) => (<TodoItem key={v.id} index={i} item={v} onChange={onChangeCheckBox} />))}
+            {todo.map((v, i) => (<TodoItem key={v.id} index={i} item={v} setTodo={setTodo} />))}
             <TodoForm onChangeNewTodo={onChangeNewTodo} newTodo={newTodo} onSubmit={onSubmit} />
           </>
         )}
